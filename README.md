@@ -1,2 +1,2 @@
 # LetsJob-App
-A hybrid mobile app build with Ionic
+A hybrid mobile app built with Ionic ( in progress )
