@@ -1,0 +1,16 @@
+.header-box {
+    background-color: rgb(228, 228, 228);
+    height: 25%;
+    overflow: scroll;
+}
+.footer {
+    left: 0;
+    bottom: 0;
+    position: fixed;
+    z-index: 10;
+    display: block;
+    width: 100%;
+}
+.space {
+    height: 15px;
+}

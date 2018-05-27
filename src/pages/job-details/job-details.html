@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Job Details
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div class="header-box" padding>
+    <h1>{{selectedJob.title}}</h1>
+  </div>
+  <ion-item>
+    <ion-icon name="briefcase-outline" item-start></ion-icon>
+    <p *ngIf="selectedJob.experience.length !== 0;else noExp">
+        {{selectedJob.experience.join('-') + ' Years'}}
+    </p>
+    <ng-template #noExp>-</ng-template>
+  </ion-item>
+  <ion-item>
+    <ion-icon name="pin-outline" item-start></ion-icon>
+    <p *ngIf="selectedJob.location.length !== 0;else noExp">
+        <span *ngFor="let location of selectedJob.location;let i = index">
+            {{location}}
+            <span *ngIf="i !== selectedJob.location.length - 1">,</span>
+        </span>
+    </p>
+    <ng-template #noExp>-</ng-template>
+  </ion-item>
+  <ion-item>
+    <ion-icon name="cash-outline" item-start></ion-icon>
+    <p *ngIf="selectedJob.salary.salaryRange.length !== 0;else noExp">
+        <span *ngFor="let salary of selectedJob.salary.salaryRange;let i= index">
+            {{salary | currency:'INR':'symbol':'1.0-0'}}
+            <span *ngIf="selectedJob.salary.salaryRange.length === 2 && i !== 1">-</span>  
+        </span>  
+        {{ ' ' + selectedJob.salary.salaryType }}
+    </p>
+    <ng-template #noExp>-</ng-template>
+  </ion-item>
+  <ion-item>
+    <ion-icon name="calendar-outline" item-start></ion-icon>
+    <p>{{'Posted on ' + dataTimeService.getLocaleDate(selectedJob.createdAt) }}</p>
+  </ion-item>
+  <div padding>
+    <h2>Description</h2>
+    <p>
+      {{selectedJob.description}}
+    </p>
+  </div>
+  <div *ngIf="selectedJob.role" padding>
+    <h3>Role</h3>
+    <p>
+      {{selectedJob.role}}
+    </p>
+  </div>
+  <div padding>
+    <h3>Category</h3>
+    <p>
+      {{jobsService.getCategoryName(selectedJob.category)}}
+    </p>
+  </div>
+  <div class="space"></div>
+  <p>
+    <button ion-button round full class="footer" (click)="openMenu()">Contact</button>
+  </p>
+</ion-content>
